@@ -16,7 +16,11 @@ class WelcomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        previewInstalledAppList()
+        try {
+            previewInstalledAppList()
+        } catch (t: Throwable) {
+            t.printStackTrace()
+        }
         jump()
     }
 

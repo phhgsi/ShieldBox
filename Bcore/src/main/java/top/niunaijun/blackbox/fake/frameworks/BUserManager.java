@@ -31,8 +31,11 @@ public class BUserManager extends BlackManager<IBUserManagerService> {
 
     public BUserInfo createUser(int userId) {
         try {
-            return getService().createUser(userId);
-        } catch (RemoteException e) {
+            IBUserManagerService service = getService();
+            if (service != null) {
+                return service.createUser(userId);
+            }
+        } catch (Throwable e) {
             e.printStackTrace();
         }
         return null;
@@ -40,16 +43,22 @@ public class BUserManager extends BlackManager<IBUserManagerService> {
 
     public void deleteUser(int userId) {
         try {
-            getService().deleteUser(userId);
-        } catch (RemoteException e) {
+            IBUserManagerService service = getService();
+            if (service != null) {
+                service.deleteUser(userId);
+            }
+        } catch (Throwable e) {
             e.printStackTrace();
         }
     }
 
     public List<BUserInfo> getUsers() {
         try {
-            return getService().getUsers();
-        } catch (RemoteException e) {
+            IBUserManagerService service = getService();
+            if (service != null) {
+                return service.getUsers();
+            }
+        } catch (Throwable e) {
             e.printStackTrace();
         }
         return Collections.emptyList();

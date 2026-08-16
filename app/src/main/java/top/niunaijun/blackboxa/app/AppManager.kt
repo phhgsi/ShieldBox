@@ -24,14 +24,18 @@ object AppManager {
         try {
             mBlackBoxLoader.attachBaseContext(context)
             mBlackBoxLoader.addLifecycleCallback()
-        } catch (e: Exception) {
+        } catch (e: Throwable) {
             e.printStackTrace()
         }
     }
 
     fun doOnCreate(context: Context) {
-        mBlackBoxLoader.doOnCreate(context)
-        initThirdService(context)
+        try {
+            mBlackBoxLoader.doOnCreate(context)
+            initThirdService(context)
+        } catch (e: Throwable) {
+            e.printStackTrace()
+        }
     }
 
     private fun initThirdService(context: Context) {}

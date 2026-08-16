@@ -27,12 +27,19 @@ class App : Application() {
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
         mContext = base!!
-        AppManager.doAttachBaseContext(base)
-
+        try {
+            AppManager.doAttachBaseContext(base)
+        } catch (t: Throwable) {
+            t.printStackTrace()
+        }
     }
 
     override fun onCreate() {
         super.onCreate()
-        AppManager.doOnCreate(mContext)
+        try {
+            AppManager.doOnCreate(mContext)
+        } catch (t: Throwable) {
+            t.printStackTrace()
+        }
     }
 }

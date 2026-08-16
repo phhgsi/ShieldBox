@@ -47,7 +47,8 @@ class MainActivity : LoadingActivity() {
     private fun initToolbarSubTitle() {
         updateUserRemark(0)
         //hack code
-        viewBinding.toolbarLayout.toolbar.getChildAt(1).setOnClickListener {
+        val titleView = viewBinding.toolbarLayout.toolbar.getChildAt(1)
+        titleView?.setOnClickListener {
             MaterialDialog(this).show {
                 title(res = R.string.userRemark)
                 input(
@@ -66,14 +67,22 @@ class MainActivity : LoadingActivity() {
     }
 
     private fun initViewPager() {
+        val userList = try {
+            BlackBoxCore.get().users
+        } catch (t: Throwable) {
+            emptyList()
+        } ?: emptyList()
 
-        val userList = BlackBoxCore.get().users
-        userList.forEach {
-            fragmentList.add(AppsFragment.newInstance(it.id))
+        if (userList.isEmpty()) {
+            fragmentList.add(AppsFragment.newInstance(0))
+        } else {
+            userList.forEach {
+                fragmentList.add(AppsFragment.newInstance(it.id))
+            }
+            fragmentList.add(AppsFragment.newInstance(userList.size))
         }
 
         currentUser = userList.firstOrNull()?.id ?: 0
-        fragmentList.add(AppsFragment.newInstance(userList.size))
 
         mViewPagerAdapter = ViewPagerAdapter(this)
         mViewPagerAdapter.replaceData(fragmentList)
@@ -83,12 +92,13 @@ class MainActivity : LoadingActivity() {
             ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                currentUser = fragmentList[position].userID
-                updateUserRemark(currentUser)
-                showFloatButton(true)
+                if (position in fragmentList.indices) {
+                    currentUser = fragmentList[position].userID
+                    updateUserRemark(currentUser)
+                    showFloatButton(true)
+                }
             }
         })
-
     }
 
     private fun initFab() {

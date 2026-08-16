@@ -23,16 +23,24 @@ public abstract class BlackManager<Service extends IInterface> {
             return mService;
         }
         try {
+            IBinder binder = BlackBoxCore.get().getService(getServiceName());
+            if (binder == null) {
+                return null;
+            }
             mService = Reflector.on(getTClass().getName() + "$Stub").method("asInterface", IBinder.class)
-                    .call(BlackBoxCore.get().getService(getServiceName()));
-            mService.asBinder().linkToDeath(new IBinder.DeathRecipient() {
-                @Override
-                public void binderDied() {
-                    mService.asBinder().unlinkToDeath(this, 0);
-                    mService = null;
-                }
-            }, 0);
-            return getService();
+                    .call(binder);
+            if (mService != null && mService.asBinder() != null) {
+                mService.asBinder().linkToDeath(new IBinder.DeathRecipient() {
+                    @Override
+                    public void binderDied() {
+                        if (mService != null && mService.asBinder() != null) {
+                            mService.asBinder().unlinkToDeath(this, 0);
+                        }
+                        mService = null;
+                    }
+                }, 0);
+            }
+            return mService;
         } catch (Throwable e) {
             e.printStackTrace();
             return null;

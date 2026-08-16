@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.4.1)
+project(pine)
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-set(LINKER_FLAGS "-ffixed-x18 -Wl,--hash-style=both")
+set(LINKER_FLAGS "-ffixed-x18 -Wl,--hash-style=both -Wl,-z,max-page-size=16384")
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} ${LINKER_FLAGS}")
 set(CMAKE_STATIC_LINKER_FLAGS "${CMAKE_STATIC_LINKER_FLAGS} ${LINKER_FLAGS}")
 set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} ${LINKER_FLAGS}")

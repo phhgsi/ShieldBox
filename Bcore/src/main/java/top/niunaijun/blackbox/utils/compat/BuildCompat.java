@@ -15,6 +15,43 @@ public class BuildCompat {
         return 0;
     }
 
+    // 16 (Baklava)
+    public static boolean isBaklava() {
+        return Build.VERSION.SDK_INT >= 36 || (Build.VERSION.SDK_INT >= 35 && Build.VERSION.PREVIEW_SDK_INT == 1);
+    }
+
+    // 15 (Vanilla Ice Cream)
+    public static boolean isVanillaIceCream() {
+        return Build.VERSION.SDK_INT >= 35 || (Build.VERSION.SDK_INT >= 34 && Build.VERSION.PREVIEW_SDK_INT == 1);
+    }
+
+    public static boolean isV() {
+        return isVanillaIceCream();
+    }
+
+    // 14 (Upside Down Cake)
+    public static boolean isUpsideDownCake() {
+        return Build.VERSION.SDK_INT >= 34 || (Build.VERSION.SDK_INT >= 33 && Build.VERSION.PREVIEW_SDK_INT == 1);
+    }
+
+    public static boolean isU() {
+        return isUpsideDownCake();
+    }
+
+    // 13 (Tiramisu)
+    public static boolean isTiramisu() {
+        return Build.VERSION.SDK_INT >= 33 || (Build.VERSION.SDK_INT >= 32 && Build.VERSION.PREVIEW_SDK_INT == 1);
+    }
+
+    public static boolean isT() {
+        return isTiramisu();
+    }
+
+    // 12L
+    public static boolean isSv2() {
+        return Build.VERSION.SDK_INT >= 32;
+    }
+
     // 12
     public static boolean isS() {
         return Build.VERSION.SDK_INT >= 31 || (Build.VERSION.SDK_INT >= 30 && Build.VERSION.PREVIEW_SDK_INT == 1);

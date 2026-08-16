@@ -161,7 +161,11 @@ public class HookManager {
         IInjectHook iInjectHook = mInjectors.get(clazz);
         if (iInjectHook != null && iInjectHook.isBadEnv()) {
             Log.d(TAG, "checkEnv: " + clazz.getSimpleName() + " is bad env");
-            iInjectHook.injectHook();
+            try {
+                iInjectHook.injectHook();
+            } catch (Throwable t) {
+                Slog.e(TAG, "checkEnv error: " + clazz.getSimpleName(), t);
+            }
         }
     }
 
@@ -170,7 +174,11 @@ public class HookManager {
             IInjectHook iInjectHook = mInjectors.get(aClass);
             if (iInjectHook != null && iInjectHook.isBadEnv()) {
                 Log.d(TAG, "checkEnv: " + aClass.getSimpleName() + " is bad env");
-                iInjectHook.injectHook();
+                try {
+                    iInjectHook.injectHook();
+                } catch (Throwable t) {
+                    Slog.e(TAG, "checkEnv error: " + aClass.getSimpleName(), t);
+                }
             }
         }
     }
@@ -184,8 +192,8 @@ public class HookManager {
             try {
                 Slog.d(TAG, "hook: " + value);
                 value.injectHook();
-            } catch (Exception e) {
-                Slog.d(TAG, "hook error: " + value);
+            } catch (Throwable t) {
+                Slog.d(TAG, "hook error (handled): " + value + ", " + t.getMessage());
             }
         }
     }
