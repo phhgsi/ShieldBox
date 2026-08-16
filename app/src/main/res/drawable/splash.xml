@@ -2,13 +2,21 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="@android:color/white" />
+            <gradient
+                android:angle="135"
+                android:startColor="#090C12"
+                android:centerColor="#0E1420"
+                android:endColor="#111827"
+                android:type="linear" />
         </shape>
     </item>
 
-    <item>
+    <item
+        android:width="120dp"
+        android:height="120dp"
+        android:gravity="center">
         <bitmap
-                android:gravity="center"
-                android:src="@mipmap/ic_launcher" />
+            android:gravity="center"
+            android:src="@mipmap/ic_launcher" />
     </item>
 </layer-list>

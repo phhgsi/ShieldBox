@@ -1,32 +1,43 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.BlackBox" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <!-- Base application theme: Modern Fluid Liquid Glass. -->
+    <style name="Theme.BlackBox" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryVariant">@color/primary_dark</item>
         <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/primary_light</item>
-        <item name="colorSecondaryVariant">@color/primary</item>
-        <item name="colorOnSecondary">@color/white</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
 
+        <!-- Secondary / Accent colors. -->
+        <item name="colorSecondary">@color/cyan_accent</item>
+        <item name="colorSecondaryVariant">@color/purple_accent</item>
+        <item name="colorOnSecondary">@color/primary_dark</item>
+
+        <!-- Backgrounds & Surfaces. -->
+        <item name="android:windowBackground">@drawable/bg_liquid_dark</item>
+        <item name="colorSurface">@color/glass_surface</item>
+        <item name="colorOnSurface">@color/primary_text</item>
+
+        <!-- Status bar & Navigation bar. -->
+        <item name="android:statusBarColor" tools:targetApi="l">@color/primary</item>
+        <item name="android:navigationBarColor" tools:targetApi="l">@color/primary_dark</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+
+        <!-- Action menu & typography. -->
         <item name="actionMenuTextColor">@color/primary_text</item>
-
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
     </style>
 
-    <style name="ToolBarColorStyle" parent="ThemeOverlay.AppCompat.ActionBar">
-        <item name="actionMenuTextColor">@color/white</item>
-        <item name="colorControlNormal">@color/white</item>
-
+    <style name="ToolBarColorStyle" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
+        <item name="actionMenuTextColor">@color/primary_text</item>
+        <item name="colorControlNormal">@color/cyan_accent</item>
+        <item name="android:textColorPrimary">@color/primary_text</item>
+        <item name="android:textColorSecondary">@color/cyan_accent</item>
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
     </style>
 
-    <style name="WelcomeTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="WelcomeTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@drawable/splash</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/primary</item>
+        <item name="android:navigationBarColor" tools:targetApi="l">@color/primary_dark</item>
     </style>
 
 </resources>
