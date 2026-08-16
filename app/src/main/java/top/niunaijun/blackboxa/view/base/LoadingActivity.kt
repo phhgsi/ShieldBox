@@ -1,8 +1,11 @@
 package top.niunaijun.blackboxa.view.base
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.KeyEvent
-import com.roger.catloadinglibrary.CatLoadingView
-import top.niunaijun.blackboxa.R
+import android.view.ViewGroup
+import android.widget.ProgressBar
 
 /**
  *
@@ -12,32 +15,44 @@ import top.niunaijun.blackboxa.R
  */
 abstract class LoadingActivity : BaseActivity() {
 
-    private lateinit var loadingView: CatLoadingView
-
+    private var loadingDialog: Dialog? = null
 
     fun showLoading() {
-        if (!this::loadingView.isInitialized) {
-            loadingView = CatLoadingView()
+        if (loadingDialog == null) {
+            loadingDialog = Dialog(this).apply {
+                val progressBar = ProgressBar(this@LoadingActivity).apply {
+                    isIndeterminate = true
+                }
+                setContentView(
+                    progressBar,
+                    ViewGroup.LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT
+                    )
+                )
+                window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                setCancelable(false)
+                setCanceledOnTouchOutside(false)
+                setOnKeyListener { _, keyCode, _ ->
+                    keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_ESCAPE
+                }
+            }
         }
 
-        if (!loadingView.isAdded) {
-            loadingView.setBackgroundColor(R.color.primary)
-            loadingView.show(supportFragmentManager, "")
-            supportFragmentManager.executePendingTransactions()
-            loadingView.setClickCancelAble(false)
-            loadingView.dialog?.setOnKeyListener { _, keyCode, _ ->
-                if (keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_ESCAPE) {
-                    return@setOnKeyListener true
-                }
-                false
-            }
+        if (!isFinishing && loadingDialog?.isShowing == false) {
+            loadingDialog?.show()
         }
     }
 
-
     fun hideLoading() {
-        if (this::loadingView.isInitialized) {
-            loadingView.dismiss()
+        if (!isFinishing && loadingDialog?.isShowing == true) {
+            loadingDialog?.dismiss()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        loadingDialog?.dismiss()
+        loadingDialog = null
     }
 }

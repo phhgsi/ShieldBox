@@ -148,16 +148,16 @@ class MainActivity : LoadingActivity() {
             }
         }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
             R.id.main_git -> {
                 val intent =
-                    Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/FBlackBox/BlackBox"))
+                    Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/phhgsi/ShieldBox"))
                 startActivity(intent)
             }
 
