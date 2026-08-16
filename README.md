@@ -1,14 +1,14 @@
 ![xx](assets/banner.png)
 ### [English Version](README_EN.md)
 
-# 虚拟引擎 · BlackBox
+# 虚拟引擎 · ShieldBox
 > The only people who have anything to fear from free software are those whose products are worth even less. 
 >
 > <p align="right">——David Emery</p>
 
 ![](https://img.shields.io/badge/language-java-brightgreen.svg)
 
-黑盒BlackBox，是一款虚拟引擎，可以在Android上克隆、运行虚拟应用，拥有免安装运行能力。黑盒可以掌控被运行的虚拟应用，做任何想做的事情。
+ShieldBox，是一款虚拟引擎，可以在Android上克隆、运行虚拟应用，拥有免安装运行能力。ShieldBox可以掌控被运行的虚拟应用，做任何想做的事情。
 
 ## 支持
 暂不考虑4x，目前已兼容 5.0 ～ 12.0并跟进后续新系统。

@@ -7,4 +7,4 @@ include ':Bcore:pine-core'
 include ':Bcore:pine-xposed-res'
 include ':android-mirror'
 
-rootProject.name = "BlackBox"
+rootProject.name = "ShieldBox"
